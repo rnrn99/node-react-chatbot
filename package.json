@@ -1,0 +1,26 @@
+{
+  "name": "chatbot-app",
+  "version": "1.0.0",
+  "description": "chatbot-app",
+  "main": "index.js",
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.9.0"
+  },
+  "scripts": {
+    "start": "concurrently \"nodemon index.js\"  \"npm run start --prefix client\""
+  },
+  "author": "Jaewon Ahn",
+  "license": "ISC",
+  "dependencies": {
+    "actions-on-google": "^2.14.0",
+    "dialogflow": "^1.2.0",
+    "dialogflow-fulfillment": "^0.6.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.7"
+  }
+}
