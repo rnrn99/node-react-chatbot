@@ -8,7 +8,8 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "concurrently \"nodemon index.js\"  \"npm run start --prefix client\""
+    "start": "concurrently \"nodemon index.js\"  \"npm run start --prefix client\"",
+    "backend": "nodemon index.js"
   },
   "author": "Jaewon Ahn",
   "license": "ISC",
