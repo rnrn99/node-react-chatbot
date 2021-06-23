@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 function Chatbot() {
+
+    useEffect(() => {
+        eventQuery('event_Welcome')
+    }, [])
 
     // 서버의 textQuery에 req 보내고 res 처리
     const textQuery = async (msg) => {
@@ -48,6 +52,39 @@ function Chatbot() {
                 }
             }
             console.log("Error : ",conversation)
+        }
+    }
+
+    const eventQuery = async (event) => {
+
+        // event에 대한 form
+        const eventQueryVariables = {
+            event
+        }
+
+        // 요청 & 응답 처리
+        try {
+            // eventQuery Route에 req 보내기
+            const res = await axios.post('/api/dialogflow/eventQuery', eventQueryVariables)
+            const content = res.data.fulfillmentMessages[0]
+
+            let conversation = {
+                who: 'chatbot',
+                content: content
+            }
+
+            console.log(conversation)
+
+        } catch(error) {
+            let conversation = {
+                who: 'chatbot',
+                content: {
+                    text: {
+                        text: "Failed to request to(or response in) eventQuery"
+                    }
+                }
+            }
+            console.log(conversation)
         }
     }
 
