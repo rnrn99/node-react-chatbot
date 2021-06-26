@@ -42,15 +42,16 @@ function Chatbot() {
             const res = await axios.post('/api/dialogflow/textQuery', textQueryVariables);
 
             // 요청에 대한 응답이 담긴 부분
-            const content = res.data.fulfillmentMessages[0];
+            for(let content of res.data.fulfillmentMessages) {
+                conversation = {
+                    who: 'chatbot',
+                    content: content
+                };
+    
+                // 화면 업로드를 위한 대화 save
+                dispatch(saveMsg(conversation));
+            }
 
-            conversation = {
-                who: 'chatbot',
-                content: content
-            };
-
-            // 화면 업로드를 위한 대화 save
-            dispatch(saveMsg(conversation));
 
         } catch(error) {
             conversation = {
@@ -77,16 +78,16 @@ function Chatbot() {
         try {
             // eventQuery Route에 req 보내기
             const res = await axios.post('/api/dialogflow/eventQuery', eventQueryVariables);
-            const content = res.data.fulfillmentMessages[0];
-
-            let conversation = {
-                who: 'chatbot',
-                content: content
-            };
-
-            // 화면 업로드를 위한 대화 save
-            dispatch(saveMsg(conversation));
-
+            // 요청에 대한 응답이 담긴 부분
+            for(let content of res.data.fulfillmentMessages) {
+                let conversation = {
+                    who: 'chatbot',
+                    content: content
+                };
+    
+                // 화면 업로드를 위한 대화 save
+                dispatch(saveMsg(conversation));
+            }
         } catch(error) {
             let conversation = {
                 who: 'chatbot',
@@ -116,11 +117,14 @@ function Chatbot() {
     }
 
     const renderOneMsg = (message, i) => {
-        // console.log(message)
+        // normal message와 card message 구분
+        console.log(message)
 
-        return (
-            <Message key={i} who={message.who} text={message.content.text.text}/>
-        )
+        // normal message
+        // return <Message key={i} who={message.who} text={message.content.text.text}/>
+
+        // card message
+
     }
 
     const renderMsg = (returnedMsg) => {
