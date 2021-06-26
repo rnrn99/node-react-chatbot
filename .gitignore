@@ -13,4 +13,7 @@ yarn-error.log*
 dev.js
 ./server/config/dev.js
 
+# 데스크탑
 node-react-chatbot-60c5c6a1960d.json
+# 노트북
+node-react-chatbot-10fe5ef14aaa.json

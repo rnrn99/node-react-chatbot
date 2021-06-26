@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux'
+import {saveMsg} from '../_actions/message_actions'
 
 function Chatbot() {
+    const dispatch = useDispatch();
 
     useEffect(() => {
         eventQuery('event_Welcome')
@@ -21,6 +24,9 @@ function Chatbot() {
                 }
             }
         }
+
+        // 화면 업로드를 위한 보낸 문장 save
+        dispatch(saveMsg(conversation))
 
         // 보낼 문장에 대한 form
         const textQueryVariables = {
